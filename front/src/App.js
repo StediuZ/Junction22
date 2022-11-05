@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from "react";
+import './App.css';
 
 function App() {
   const [date, setDate] = useState(new Date());
