@@ -12,13 +12,13 @@ mood_post_parser.add_argument(
     'question',
     type=str,
     required=True,
-    help="Title is required",
+    help="Question is required",
     location=('json', 'values')
 )
 mood_post_parser.add_argument(
     'answer',
     type=str,
     required=True,
-    help="Body text is required",
+    help="Answer is required",
     location=('json', 'values')
 )

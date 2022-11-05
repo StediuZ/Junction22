@@ -13,10 +13,11 @@ from .parsers import (
 
 mood_fields = {
     'id': fields.Integer(),
+    'date': fields.DateTime(dt_format='iso8601'),
     'question': fields.String(),
     'answer': fields.String(),
+    'output': fields.String(),
     'value': fields.Integer(),
-    'date': fields.DateTime(dt_format='iso8601')
 }
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -37,6 +38,8 @@ class MoodApi(Resource):
 
     def post(self):
         args = mood_post_parser.parse_args(strict=True)
+        if not args:
+            abort(404)
 
         question = args['question']
         answer = args['answer']
@@ -55,7 +58,7 @@ class MoodApi(Resource):
         numerical = int(output[0].split(": ")[-1])
         feedback = output[1].split(": ")[-1]
 
-        new_mood = Mood(numerical)
+        new_mood = Mood(question, answer, feedback, numerical)
 
         db.session.add(new_mood)
         db.session.commit()
