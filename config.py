@@ -10,7 +10,6 @@ env = os.environ.get('MOODAPP_ENV')
 
 class Config(object):
     SECRET_KEY = os.environ.get('CONF_SECRET_KEY')
-    POSTS_PER_PAGE = 10
 
 
 match env:

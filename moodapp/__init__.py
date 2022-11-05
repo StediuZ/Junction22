@@ -11,12 +11,10 @@ def create_app(object_name):
     app.config.from_object(object_name)
     db.init_app(app)
 
-    #from .auth import create_module as auth_create_module
-    #from .logic import create_module as logic_create_module
+    from .logic import create_module as logic_create_module
     from .main import create_module as main_create_module
-    #from .api import create_module as api_create_module
-    # auth_create_module(app)
-    # logic_create_module(app)
+    from .api import create_module as api_create_module
+    logic_create_module(app)
     main_create_module(app)
-    # api_create_module(app)
+    api_create_module(app)
     return app
