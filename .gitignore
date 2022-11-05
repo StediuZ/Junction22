@@ -1,0 +1,12 @@
+*.pyc
+*.pem
+*.pub
+*.tar.gz
+*.zip
+*.sql
+*.db
+*.DS_Store
+**/tmp
+**/env
+**/venv
+**/node_modules
