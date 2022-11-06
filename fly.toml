@@ -1,6 +1,6 @@
-# fly.toml file generated for moodcast on 2022-11-05T14:30:26+02:00
+# fly.toml file generated for moodkast on 2022-11-06T02:18:28+02:00
 
-app = "moodcast"
+app = "moodkast"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []

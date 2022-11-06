@@ -14,11 +14,14 @@ function App() {
     "Did you sleep well?",
     "Are you feeling stressed?",
     "Do you have a lot of worries?",
-    "Are you feeling energized?"
+    "Are you feeling energized?",
+    "Have you had fun today?",
+    "How are you feeling today?",
+    "Do you feel tired often?",
+    "Are you relaxed?",
+    "What is important to you?",
   ]
   const [question, setQuestion] = useState(questions[Math.floor(Math.random() * questions.length)])
-
-  const [message, setMessage] = useState('hehe');
 
   function handleTextChange(value) {
     setText(value);
@@ -26,15 +29,18 @@ function App() {
 
   function onSubmitGM(e) {
     e.preventDefault();
-    setView("question")
+    setText("");
+    setView("question");
   }
   
   function onSubmitQuestion(e) {
     e.preventDefault();
-    axios.post(`https://moodcast.fly.dev/api/mood`, { question: question, answer: text})
+    axios.post(`https://moodkast.fly.dev/api/mood`, { question: question, answer: text})
     .then(function (response) {
       setFeedback(response.data.feedback);
       setQuestion(questions[Math.floor(Math.random() * questions.length)]);
+      setText("");
+      e.target.value = "";
     })
     .catch(function (error) {
       console.log(error);
@@ -46,7 +52,7 @@ function App() {
       <div className="fill-window">
         <p className="fix-stroke" id="gm">Good morning, {name}.</p>
         <form onSubmit={onSubmitGM}>
-          <UnstyledInputBasic value={message} 
+          <UnstyledInputBasic value={text} 
             onChange={(e) => {
               handleTextChange(e.target.value);
             }}></UnstyledInputBasic>
@@ -69,10 +75,11 @@ function App() {
         <div className="questionBox">
           <p className="question">{question}</p>
           <form onSubmit={onSubmitQuestion}>
-            <UnstyledInputBasic value={message} 
+            <UnstyledInputBasic value={text} 
               onChange={(e) => {
                 handleTextChange(e.target.value);
-              }}></UnstyledInputBasic>
+              }}
+            ></UnstyledInputBasic>
           </form>
           {feedback != "" &&
             <p className="feedback">{feedback}</p>
